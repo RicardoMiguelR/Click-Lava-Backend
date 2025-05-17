@@ -1,7 +1,9 @@
+USE clic_lava;
+
 -- INSERT Roles
 SELECT * FROM rol;
-INSERT INTO rol (`nombreRol`) VALUES ('administrador');
-INSERT INTO Rol (`nombreRol`) VALUES ('cliente');
+INSERT INTO rol VALUES (1, 'administrador');
+INSERT INTO Rol VALUES (2, 'cliente');
 
 -- INSERT Usuario
 SELECT * FROM usuario;
