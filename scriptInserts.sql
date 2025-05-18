@@ -28,3 +28,11 @@ INSERT INTO pedido VALUES (2,"Calle 20 de noviembre","Las Águilas" ,"Nezahualco
 INSERT INTO pedido VALUES (3,"Av. Pantitlán 300","Benito Juárez" ,"Nezahualcoyotl", "5700", "2025-05-22 09:00:00", 1, "Un día", 3);
 INSERT INTO pedido VALUES (4,"Calle Vicente Gerrero 89","Benito Juárez" ,"Nezahualcoyotl", "5700", "2025-05-23 12:00:00", 1, "Un día", 4);
 INSERT INTO pedido VALUES (5,"Av. Riva Palacio 150","Benito Juárez" ,"Nezahualcoyotl", "5700", "2025-05-23 7:00:00", 1, "Un día", 5);
+
+-- INSERTS producto ->
+SELECT * FROM producto;
+INSERT INTO producto VALUES (null, "Lavadora", "Lava bien padre", "89.99", 5, "https://picsum.photos/id/237/200/300");
+INSERT INTO producto VALUES (null, "Secadora", "Seca bien padre", "58.79", 7, "https://picsum.photos/id/96/200/300");
+INSERT INTO producto VALUES (null, "Suavitel", "Suaviza bien padre", "19.90", 10, "https://picsum.photos/id/57/200/300");
+INSERT INTO producto VALUES (null, "Ace 1kg", "¡Por que Ace lo hace!", "15.35", 16, "https://picsum.photos/id/26/200/300");
+INSERT INTO producto VALUES (null, "Cloralex", "Blanquea bien padre", "21.80", 12, "https://picsum.photos/id/2/200/300");
