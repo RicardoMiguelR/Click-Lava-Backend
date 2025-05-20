@@ -1,4 +1,4 @@
-package org.clicLava.Model;
+package org.clicLava.model;
 
 public class Rol {
 

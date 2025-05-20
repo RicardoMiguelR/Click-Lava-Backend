@@ -1,4 +1,4 @@
-package org.clicLava.Service;
+package org.clicLava.service;
 
 public class RolService {
 
