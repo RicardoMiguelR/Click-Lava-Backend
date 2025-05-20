@@ -1,4 +1,4 @@
-package com.clic_lava.clic_lava;
+package org.clicLava;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.clic_lava.clic_lava;
+package org.clicLava;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
