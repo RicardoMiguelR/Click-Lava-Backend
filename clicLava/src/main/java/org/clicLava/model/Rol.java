@@ -1,20 +1,30 @@
 package org.clicLava.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "rol")
 public class Rol {
-	private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idRol",  nullable = false)
+	private Integer id;
+	
+	@Column(name = "nombreRol", nullable = false)
 	private String rol;
-	private static Long totalRol = Long.valueOf(0);
 	
 	
 	public Rol(String rol) {
-		Rol.totalRol++;
-        this.id = Rol.totalRol;
         this.rol = rol;
 	}
 	
 	public Rol() {
-		Rol.totalRol++;
-		this.id = Rol.totalRol;
+		
 	}
 
 
@@ -28,7 +38,7 @@ public class Rol {
 	}
 
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 

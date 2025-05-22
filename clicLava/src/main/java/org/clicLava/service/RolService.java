@@ -2,63 +2,71 @@ package org.clicLava.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.clicLava.model.Rol;
+import org.clicLava.repository.RolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RolService {
-    private final List<Rol> listaRoles = new ArrayList<Rol>();
     
+	private final RolRepository rolRepository;
+	
     @Autowired
-    public RolService() {
-        listaRoles.add(new Rol("administrador"));
-        listaRoles.add(new Rol("cliente"));
-
+    public RolService(RolRepository rolRepository) {
+        this.rolRepository = rolRepository;
     }
     
     public List<Rol> getRoles() {
-        return listaRoles;
+        return rolRepository.findAll();
     }
     
-    public Rol getRol(Long id) {
+    public Rol getRol(Integer id) {
         Rol tmp = null;
-        for (Rol rol : listaRoles) {
-            if (rol.getId() == id) {
-                tmp = rol;
-                break;
-            }
+        
+        if(rolRepository.existsById(id)) {
+        	tmp = rolRepository.findById(id).get();
         }
+        
         return tmp;
     }
     
-    public Rol deleteRol(Long id) {
+    public Rol deleteRol(Integer id) {
         Rol tmp = null;
-        for (Rol rol : listaRoles) {
-            if (rol.getId() == id) {
-                tmp = rol;
-                listaRoles.remove(rol);
-                break;
-            }
+        
+        if(rolRepository.existsById(id)) {
+        	tmp = rolRepository.findById(id).get();
+        	rolRepository.deleteById(id);
         }
+        
         return tmp;
     }
     
     public Rol addRol(Rol rol) {
-        listaRoles.add(rol);
+        Optional<Rol> roles = rolRepository.findByRol(rol.getRol()); 
+        
+        if(roles.isEmpty()) {
+        	rolRepository.save(rol);
+        }else {
+        	rol = null;
+        }
+        		
         return rol;
     }
     
-    public Rol updateRol(Long id, String nombreRol) {
+    public Rol updateRol(Integer id, String nombreRol) {
         Rol tmp = null;
-        for (Rol rol : listaRoles) {
-            if (rol.getId() == id) {
-                if(nombreRol != null) rol.setRol(nombreRol);
-                tmp = rol;
-                break;
-            }
+        
+        if(rolRepository.existsById(id)) {
+        	Rol rol = rolRepository.findById(id).get();
+        	if(nombreRol != null) rol.setRol(nombreRol);
+        	
+        	rolRepository.save(rol);
+        	tmp = rol;
         }
+        
         return tmp;
     }
 }
