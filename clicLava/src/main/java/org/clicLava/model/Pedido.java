@@ -1,17 +1,37 @@
 package org.clicLava.model;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name = "pedidos")
 public class Pedido {
+
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column(name = "id",  nullable = false)	
 		private Long id;
+        @Column (nullable=false)
 		private String calle;
+        @Column (nullable=false)
 		private String colonia;
+        @Column (nullable=false)
 		private String municipio;
+        @Column (nullable=false)
 		private String codigoPostal;
+        @Column (nullable=false)
 		private String fechaPedido;
+        @Column (nullable=false)
 		private Double cantidad;
+        @Column (nullable=false)
 		private String tiempo;
+        @Column (nullable=false)
 		private Long idUsuario;
-		private static Long total= Long.valueOf(0);
-		
+        
 		public Pedido(String calle, String colonia, String municipio, String codigoPostal, String fechaPedido,
 				Double cantidad, String tiempo, Long idUsuario) {
 			super();
@@ -24,14 +44,10 @@ public class Pedido {
 			this.tiempo = tiempo;
 			this.idUsuario = idUsuario;
 			
-			Pedido.total++;
-			this.id=Pedido.total;
+
 		}//constructor
 		
-		public Pedido() {
-			Pedido.total++;
-			this.id=Pedido.total;
-		} //Constructor vacío
+		public Pedido() {} //Constructor vacío
 		
 		//Getters and setters
 
