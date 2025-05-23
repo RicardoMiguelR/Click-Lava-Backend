@@ -1,20 +1,38 @@
 package org.clicLava.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
 	
-	private Long idUsuario;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
+	private Long id;
+	@Column(nullable = false)
 	private String nombre;
+	@Column(nullable = false)
 	private String apellidos;
+	@Column(nullable = false)
 	private String email;
+	@Column(nullable = false)
 	private String password;
+	@Column(nullable = false)
 	private String telefono;
+	@Column(nullable = false)
 	private String fechaRegistro;
-	private Integer idRol;
-	private static Long total = Long.valueOf(0); // "Herramienta" para crear el contador y asignarlo al id
-	
+	@Column(nullable = false)
+	private Long idRol;
+		
 	// 1. Constructor
 	public Usuario(String nombre, String apellidos, String email, String password, String telefono,
-			String fechaRegistro, Integer idRol) {
+			String fechaRegistro, Long idRol) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -23,13 +41,9 @@ public class Usuario {
 		this.telefono = telefono;
 		this.fechaRegistro = fechaRegistro;
 		this.idRol = idRol;
-		Usuario.total ++; // Incrementamos el contador
-		this.idUsuario = Usuario.total;
 	} // constructor
 	
 	public Usuario() {
-		Usuario.total ++; // Incrementamos el contador
-		this.idUsuario = Usuario.total;
 	} // constructor vacio
 
 	// 2. Getter and Setters
@@ -81,22 +95,22 @@ public class Usuario {
 		this.fechaRegistro = fechaRegistro;
 	} // setFechaRegistro
 
-	public Integer getIdRol() {
+	public Long getIdRol() {
 		return idRol;
 	} // getIdRol
 	
-	public void setIdRol(Integer idRol) {
+	public void setIdRol(Long idRol) {
 		this.idRol = idRol;
 	} // setIdRol
 	
-	public Long getIdUsuario() {
-		return idUsuario;
+	public Long getId() {
+		return id;
 	} // getId
 
 	// 3. toString()
 	@Override
 	public String toString() {
-		return "Usuario [id=" + idUsuario + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
 				+ ", password=" + password + ", telefono=" + telefono + ", fechaRegistro=" + fechaRegistro + ", idRol="
 				+ idRol + "]";
 	}
