@@ -15,10 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-    @RestController
-    @RequestMapping(path = "/api/tarjeta/")  // http://localhost:8080/api/tarjeta/
-    public class TarjetaController {
-    
+@RestController
+@RequestMapping(path = "/api/tarjeta/")  // http://localhost:8080/api/tarjeta/
+public class TarjetaController {
     private final TarjetaService tarjetaService;
     
     @Autowired
