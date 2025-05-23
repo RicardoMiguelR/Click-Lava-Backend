@@ -8,6 +8,6 @@ public class ClicLavaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ClicLavaApplication.class, args);
-	}
+	} // main 
 
-}
+} // class ClicLavaApplication

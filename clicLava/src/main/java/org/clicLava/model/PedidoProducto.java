@@ -1,10 +1,23 @@
 package org.clicLava.model;
 
-public class PedidoProducto {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "PedidoProducto") 
+public class PedidoProducto {
+@Id
+@GeneratedValue (strategy = GenerationType.IDENTITY)
+@Column (name ="idPeidoProducto", unique=true, nullable = false)
     private Long idPedido;
     private Long idProducto;
+    @Column (name ="idcantidad", nullable = false)
     private Integer cantidad;
+    @Column (nullable = false)
     private Double precioUnitario;
     
     

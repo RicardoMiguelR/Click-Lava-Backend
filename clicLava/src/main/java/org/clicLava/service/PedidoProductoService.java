@@ -1,60 +1,54 @@
 package org.clicLava.service;
 
-import org.clicLava.model.PedidoProducto;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
+import org.clicLava.model.PedidoProducto;
+import org.clicLava.repository.PedidoProductoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class PedidoProductoService {
 
-    private final List<PedidoProducto> lista = new ArrayList<>();
+    private final PedidoProductoRepository pedidoProductoRepository;
 
-    public PedidoProductoService() {
-        lista.add(new PedidoProducto(1L, 1L, 1, 89.99));
-        lista.add(new PedidoProducto(1L, 3L, 2, 19.90));
-        lista.add(new PedidoProducto(2L, 2L, 1, 58.79));
-        lista.add(new PedidoProducto(2L, 5L, 1, 21.80));
+    @Autowired
+    public PedidoProductoService(PedidoProductoRepository pedidoProductoRepository) {
+        this.pedidoProductoRepository = pedidoProductoRepository;
     }
 
-    public List<PedidoProducto> getAll() {
-        return lista;
+    public List<PedidoProducto> getPedidos() {
+        return pedidoProductoRepository.findAll();
     }
 
-    public PedidoProducto getOne(Long idPedido) {
-        for (PedidoProducto pp : lista) {
-            if (pp.getIdPedido().equals(idPedido)) {
-                return pp;
-            }
+    public PedidoProducto getPedido(Long idPedido) {
+        return pedidoProductoRepository.findById(idPedido).orElseThrow(
+            () -> new IllegalArgumentException("El pedido con ID [" + idPedido + "] no existe.")
+        );
+    }
+
+    public PedidoProducto deletePedido(Long idPedido) {
+        PedidoProducto tmp = null;
+        if (pedidoProductoRepository.existsById(idPedido)) {
+            tmp = pedidoProductoRepository.findById(idPedido).get();
+            pedidoProductoRepository.deleteById(idPedido);
         }
-        return null;
+        return tmp;
     }
 
-    public PedidoProducto add(PedidoProducto nuevo) {
-        System.out.println("Agregando: " + nuevo.getIdPedido() + ", " + nuevo.getIdProducto() + ", " + nuevo.getCantidad() + ", " + nuevo.getPrecioUnitario());
-        lista.add(nuevo);
-        return nuevo;
+    public PedidoProducto addPedido(PedidoProducto pedido) {
+        pedidoProductoRepository.save(pedido);
+        return pedido;
     }
 
-    public PedidoProducto delete(Long idPedido) {
-        PedidoProducto encontrado = getOne(idPedido);
-        if (encontrado != null) {
-            lista.remove(encontrado);
+    public PedidoProducto updatePedido(Long idPedido, Integer cantidad, Double precioUnitario) {
+        PedidoProducto tmp = null;
+        if (pedidoProductoRepository.existsById(idPedido)) {
+            PedidoProducto pedido = pedidoProductoRepository.findById(idPedido).get();
+            if (cantidad != null) pedido.setCantidad(cantidad);
+            if (precioUnitario != null) pedido.setPrecioUnitario(precioUnitario);
+            pedidoProductoRepository.save(pedido);
+            tmp = pedido;
         }
-        return encontrado;
-    }
-
-    public PedidoProducto update(Long idPedido, Integer cantidad, Double precioUnitario) {
-        PedidoProducto existente = getOne(idPedido);
-        if (existente != null) {
-            if (cantidad != null) {
-                existente.setCantidad(cantidad);
-            }
-            if (precioUnitario != null) {
-                existente.setPrecioUnitario(precioUnitario);
-            }
-        }
-        return existente;
+        return tmp;
     }
 }

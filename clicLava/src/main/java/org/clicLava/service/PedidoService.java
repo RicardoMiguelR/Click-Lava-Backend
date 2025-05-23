@@ -1,66 +1,54 @@
 package org.clicLava.service;
-import java.util.ArrayList;
 import java.util.List;
-
 import org.clicLava.model.Pedido;
+import org.clicLava.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PedidoService {
 	
-	private final List<Pedido> lista= new ArrayList<Pedido>();
+	private final PedidoRepository pedidoRepository;
 	
 	@Autowired
-	public PedidoService () {
-	//	public Pedido(String calle, String colonia, String municipio, String codigoPostal, String fechaPedido,
-		//		Double cantidad, String tiempo, Long idUsuario) {
-		lista.add(new Pedido("Av. Chimalhuacán 12", "Benito Juárez", "Nezahualcoyotl", "5700", "2025-05-19 06:00:00", 1.0, "Un día", 1L));
-		lista.add(new Pedido("Calle 20 de noviembre", "Las Águilas", "Nezahualcoyotl", "5700", "2025-05-20 08:00:00", 1.0, "Un día", 2L));
-		lista.add(new Pedido("Av. Pantitlán 300", "Benito Juárez", "Nezahualcoyotl", "5700", "2025-05-22 09:00:00", 1.0, "Un día", 3L));
-		lista.add(new Pedido("Calle Vicente Gerrero 89", "Benito Juárez", "Nezahualcoyotl", "5700", "2025-05-23 12:00:00", 1.0, "Un día", 4L));
-		lista.add(new Pedido("Av. Riva Palacio 150", "Benito Juárez", "Nezahualcoyotl", "5700", "2025-05-23 7:00:00", 1.0, "Un día", 5L));
+	public PedidoService (PedidoRepository pedidoRepository) {
+		this.pedidoRepository= pedidoRepository;
 	}//constructor
 	
 	public List<Pedido> getPedidoS (){
-		return lista;
+		return pedidoRepository.findAll();
 	}//getPedidoS
 
 	public Pedido getPedidO(Long id) {
-		Pedido tmp = null;
-		for (Pedido pedido : lista) {
-			if (pedido.getId()==id){
-				tmp= pedido;
-				break;
-			}//if
-		}//foreach
+		return pedidoRepository.findById(id).orElseThrow(
+				()-> new IllegalArgumentException("El pedido con el id [" + id
+						+ "] no existe.") 
+				);
+		}//getPedidO
 		
-		return tmp;
-	}//getPedidO
-
 	public Pedido deletePedidO(Long id) {
 		Pedido tmp = null;
-		for (Pedido pedido : lista) {
-			if (pedido.getId()==id){
-				tmp= pedido;
-				lista.remove(pedido);
-				break;
-			}//if
-		}//foreach
-		
+		if(pedidoRepository.existsById(id)) {
+			tmp=pedidoRepository.findById(id).get();
+			pedidoRepository.deleteById(id);
+		}//if exists
 		return tmp;
-	}//deletePedidO
+	}//deletePedido
+		
 
 	public Pedido addPedido(Pedido pedido) {
-		lista.add(pedido);
+		pedidoRepository.save(pedido);
 		return pedido;
-	}//addProduct
+	}//add pedido
+		
+		
+	
 
 	public Pedido updatePedido(Long id, String calle, String colonia, String municipio, String codigoPostal,
 			String fechaPedido, Double cantidad, String tiempo, Long idUsuario) {
 		Pedido tmp = null;
-		for (Pedido pedido : lista) {
-			if (pedido.getId()==id){
+				if (pedidoRepository.existsById(id)){
+					Pedido pedido= pedidoRepository.findById(id).get();
 				if(calle!=null) pedido.setCalle(calle);
 				if (colonia!=null) pedido.setColonia(colonia);
 				if (municipio!=null) pedido.setMunicipio(municipio);
@@ -68,13 +56,11 @@ public class PedidoService {
 				if (fechaPedido!=null) pedido.setFechaPedido(fechaPedido);
 				if (cantidad!=null) pedido.setCantidad(cantidad);
 				if (tiempo!=null) pedido.setTiempo(tiempo);
-				if (tiempo!=null) pedido.setIdUsuario(idUsuario);
-				
+				if (idUsuario!=null) pedido.setIdUsuario(idUsuario);
+				pedidoRepository.save(pedido);
 				tmp= pedido;
-				break;
 			}//if
-		}//foreach
-		return tmp;
+			return tmp;
 	}//updatePedido
 
 

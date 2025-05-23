@@ -31,12 +31,12 @@ public class RolController {
     }
     
     @GetMapping(path = "{rolId}")
-    public Rol getRol(@PathVariable("rolId") Integer id){
+    public Rol getRol(@PathVariable("rolId") Long id){
         return rolService.getRol(id);
     }
     
     @DeleteMapping(path = "{rolId}")
-    public Rol deleteRol(@PathVariable("rolId") Integer id){
+    public Rol deleteRol(@PathVariable("rolId") Long id){
         return rolService.deleteRol(id);
     }
     
@@ -46,7 +46,7 @@ public class RolController {
     }
     
     @PutMapping(path = "{rolId}")
-    public Rol updateRol(@PathVariable("rolId") Integer id,
+    public Rol updateRol(@PathVariable("rolId") Long id,
         @RequestParam(required = false) String rol){
         
         return rolService.updateRol(id, rol);
