@@ -1,19 +1,10 @@
 package org.clicLava.controller;
 
 import java.util.List;
-
 import org.clicLava.model.Producto;
 import org.clicLava.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.RequestParam; <- descomentar para @RequestParams
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/api/productos")
@@ -46,7 +37,7 @@ public class ProductoController {
 		return productoService.addProducto(producto);
 	}
 	
-	// Actualizar por medio de RequestBody ->
+	/* // Actualizar por medio de RequestBody ->
 	@PutMapping(path = "{prodId}")
 	public Producto updateProducto(@PathVariable("prodId") Long id, @RequestBody Producto producto) {
 		return productoService.updateProduct(
@@ -57,19 +48,17 @@ public class ProductoController {
 				producto.getStock(),
 				producto.getImagen()
 		);
-	}
+	} */
 	
-	/*
-	 * Actualizar por medio de RequestParams ->
+	// Actualizar por medio de RequestParams ->
 	@PutMapping(path = "{prodId}")
 	public Producto updateProducto(@PathVariable("prodId") Long id,
 			@RequestParam String nombre,
 			@RequestParam String descripcion,
 			@RequestParam Double precio,
 			@RequestParam Integer stock,
-			@RequestParam String imagen)
-			 {
+			@RequestParam String imagen) {
 		return productoService.updateProduct(id, nombre, descripcion, precio, stock, imagen);
-	} */
+	}
 
 }
