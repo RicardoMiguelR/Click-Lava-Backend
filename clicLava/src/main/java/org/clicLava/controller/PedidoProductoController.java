@@ -4,11 +4,10 @@ import org.clicLava.model.PedidoProducto;
 import org.clicLava.service.PedidoProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
-@RequestMapping(path="/pedidoproducto/") // http://localhost:8080/pedidoproducto/
+@RequestMapping(path="/pedidoproducto/")
 public class PedidoProductoController {
 
     private final PedidoProductoService ppService;
@@ -20,22 +19,22 @@ public class PedidoProductoController {
 
     @GetMapping
     public List<PedidoProducto> getTodos() {
-        return ppService.getAll();
+        return ppService.getPedidos();
     }
 
     @GetMapping(path="{id}")
     public PedidoProducto getUno(@PathVariable("id") Long idPedido) {
-        return ppService.getOne(idPedido);
+        return ppService.getPedido(idPedido);
     }
 
     @PostMapping
     public PedidoProducto agregar(@RequestBody PedidoProducto nuevo) {
-        return ppService.add(nuevo);
+        return ppService.addPedido(nuevo);
     }
 
     @DeleteMapping(path="{id}")
     public PedidoProducto eliminar(@PathVariable("id") Long idPedido) {
-        return ppService.delete(idPedido);
+        return ppService.deletePedido(idPedido);
     }
 
     @PutMapping(path="{id}")
@@ -44,6 +43,6 @@ public class PedidoProductoController {
         @RequestParam(required = false) Integer cantidad,
         @RequestParam(required = false) Double precioUnitario
     ) {
-        return ppService.update(idPedido, cantidad, precioUnitario);
+        return ppService.updatePedido(idPedido, cantidad, precioUnitario);
     }
 }
