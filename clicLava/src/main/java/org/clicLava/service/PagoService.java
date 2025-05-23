@@ -1,72 +1,59 @@
 package org.clicLava.service;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import org.clicLava.model.Pago;
+import org.clicLava.repository.PagoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PagoService {
-		private final List<Pago> lista= new ArrayList<Pago>();
+	
+		private final PagoRepository pagoRepository;
 		
 		@Autowired
-		public PagoService() {
-			lista.add(new Pago(Double.valueOf(95.50),"15 de mayo 2025", 15, 16));
-			lista.add(new Pago(Double.valueOf(96.50),"16 de mayo 2025", 17, 18));
-			lista.add(new Pago(Double.valueOf(59.50),"17 de mayo 2025", 19, 20));
-			lista.add(new Pago(Double.valueOf(43.50),"18 de mayo 2025", 21, 22));
-			lista.add(new Pago(Double.valueOf(53.50),"19 de mayo 2025", 23, 24));
+		public PagoService (PagoRepository pagoRepository) {
+					this.pagoRepository = pagoRepository;
 		}//Constructor
 	
 		public List<Pago> getPagos(){
-			return lista;
+			return pagoRepository.findAll();
 		}//getPago
 
 		public Pago getPago(Long id) {
 			Pago tmp =null;
-			for (Pago pago : lista) {
-				if(pago.getId()==id) {
-					tmp = pago;
-					break;
+	
+				if(pagoRepository.existsById(id)) {
+					tmp = pagoRepository.findById(id).get();
 				}//if
+				return tmp;
 			}//foreach
-			return tmp;
-		}//getPago 
 
 		public Pago deletePago(Long id) {
 			Pago tmp =null;
-			for (Pago pago : lista) {
-				if(pago.getId()==id) {
-					tmp = pago;
-					lista.remove(pago);
-					break;
-				}//if
+				 if(pagoRepository.existsById(id)) {
+			        	tmp = pagoRepository.findById(id).get();
+			        	pagoRepository.deleteById(id);
+			        }
+					return tmp;
 			}//foreach
-			return tmp;
-		}//deletePago
 
 		public Pago addPago(Pago pago) {
-			lista.add(pago);
-			return pago;
-		}//addPago
+		     
+		       return pagoRepository.save(pago);
+		        	
+		 }//addPago
+			
 
-		public Pago updatePago(Long id, Double monto, String fecha, 
-				Integer idTarjeta, Integer idPedido) {
+		public Pago updatePago(Long id, Double monto) {
 			Pago tmp = null;
-			for (Pago pago : lista) {
-				if(pago.getId()==id) {
-					if (monto!=null) pago.setMonto(monto);
-					if (fecha!=null) pago.setFecha(fecha);
-					if (idTarjeta!=null) pago.setIdTarjeta(idTarjeta);
-					if (idPedido!=null) pago.setIdPedido(idPedido);
-					tmp = pago;
-					break;
-				}//if
-			}//foreach
-			return tmp;
-		}//updatePago
-		
-		
+			if(pagoRepository.existsById(id)) {
+				Pago pago = pagoRepository.findById(id).get();
+				if(monto != null) pago.setMonto(monto);
+				
+				pagoRepository.save(pago);
+	        	tmp = pago;
+			}
+			 return tmp;
+		}//updatePago	
+
 }//	PagoService

@@ -50,11 +50,9 @@ public class PagoController {
 	
 	@PutMapping(path="{pagoId}")
 	public Pago updatePago(@PathVariable("pagoId") Long id,
-			@RequestParam(required = false)Double monto,
-			@RequestParam(required = false)String  fecha,
-			@RequestParam(required = false)Integer idTarjeta,
-			@RequestParam(required = false)Integer idPedido) {
-		return pagoService.updatePago(id, monto, fecha, idTarjeta, idPedido);
+			  @RequestParam(required = false) Double monto){
+		
+		return pagoService.updatePago(id,monto);
 	}//updatePago
 	
 }//classPagoController

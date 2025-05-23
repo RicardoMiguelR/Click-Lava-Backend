@@ -1,12 +1,25 @@
 package org.clicLava.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity//esto es una entidad
+@Table(name="pago")//cambio de nombre en l tabla pago
 public class Pago {
+	@Id//Indica al Id que es un campo Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name ="id", unique= true, nullable = false)
 	private Long id;
+	@Column(nullable = false)
 	private Double monto;
+	@Column(nullable = false)
 	private String  fecha;
 	private Integer idTarjeta;
 	private Integer idPedido;
-	private static Long total= Long.valueOf(0);
 	
 	
 public Pago(Double monto, String fecha, 
@@ -16,13 +29,10 @@ public Pago(Double monto, String fecha,
 		this.fecha = fecha;
 		this.idTarjeta = idTarjeta;
 		this.idPedido = idPedido;
-		Pago.total++;
-		this.id=Pago.total;
-	}//constructor
-	public Pago() {
-		Pago.total++;
-		this.id=Pago.total;
-	}
+		}//constructor
+	
+	public Pago() {}//constructor vacio
+	
 	///////////Getters and Setters///////////	
 	public Double getMonto() {
 		return monto;

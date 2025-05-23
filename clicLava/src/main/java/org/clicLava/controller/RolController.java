@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/roles/")
+@RequestMapping(path = "/api/roles/")
 public class RolController {
+	
     private final RolService rolService;
     
     @Autowired
