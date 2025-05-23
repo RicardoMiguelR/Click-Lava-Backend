@@ -1,16 +1,26 @@
 package org.clicLava.model;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "productos")
 public class Producto {
 	
 	// Propiedades ->
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
+	@Column(nullable = false)
 	private String nombre;
+	@Column(nullable = false)
 	private String descripcion;
+	@Column(nullable = false)
 	private Double precio;
+	@Column(nullable = false)
 	private Integer stock;
+	@Column(nullable = false)
 	private String imagen;
-	private static Long total= Long.valueOf(0);
 	
 	// Constructor ->
 	public Producto(String nombre, String descripcion, Double precio, Integer stock, String imagen) {
@@ -19,15 +29,10 @@ public class Producto {
 		this.precio = precio;
 		this.stock = stock;
 		this.imagen = imagen;
-		Producto.total++;
-		this.id = Producto.total;
 	}
 	
 	// Contructor para total ->
-	public Producto() {
-		Producto.total++;
-		this.id = Producto.total;
-	}
+	public Producto() {}
 	
 	// Getters y Setters ->
 	public String getNombre() {
