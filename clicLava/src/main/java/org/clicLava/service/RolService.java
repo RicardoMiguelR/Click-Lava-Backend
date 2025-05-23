@@ -23,7 +23,7 @@ public class RolService {
         return rolRepository.findAll();
     }
     
-    public Rol getRol(Integer id) {
+    public Rol getRol(Long id) {
         Rol tmp = null;
         
         if(rolRepository.existsById(id)) {
@@ -33,7 +33,7 @@ public class RolService {
         return tmp;
     }
     
-    public Rol deleteRol(Integer id) {
+    public Rol deleteRol(Long id) {
         Rol tmp = null;
         
         if(rolRepository.existsById(id)) {
@@ -56,7 +56,7 @@ public class RolService {
         return rol;
     }
     
-    public Rol updateRol(Integer id, String nombreRol) {
+    public Rol updateRol(Long id, String nombreRol) {
         Rol tmp = null;
         
         if(rolRepository.existsById(id)) {
