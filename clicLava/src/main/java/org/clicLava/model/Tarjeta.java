@@ -1,47 +1,50 @@
 package org.clicLava.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
-@Entity //clase usuario
-@Table(name = "tarjeta") // se nombra la entidad Tarjeta
+@Entity
+@Table(name = "tarjeta")
 public class Tarjeta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id", unique = true, nullable = false)
-	private Long idTarjeta;
+	@Column(name = "idTarjeta", unique = true, nullable = false)
+	private Long id;
 	
 	@Column(nullable = false)
 	private String nombreTitular;
+	
 	@Column(nullable = false)
 	private String numeroTarjeta;
-	@Column(nullable = false)	
-	private String vencimiento;
-	@Column(nullable = false)	
-	private Integer cvv;
+	
 	@Column(nullable = false)
-	private Integer idUsuario;
-	//private static Long totalTarjeta = Long.valueOf(0);
+	private String vencimiento;
 	
+	@Column(nullable = false)
+	private Integer cvv;
 	
-	public Tarjeta(String nombreTitular, String numeroTarjeta, String vencimiento, Integer cvv, Integer idUsuario) {
+	// Relación con Usuario
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idUsuario_fk", nullable = false)
+	private Usuario usuario;
 	
+	// Relación inversa con Pago
+	@OneToMany(mappedBy = "tarjeta", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Pago> pagos;
+	
+	public Tarjeta(String nombreTitular, String numeroTarjeta, String vencimiento, Integer cvv, Usuario usuario) {
 		this.nombreTitular = nombreTitular;
 		this.numeroTarjeta = numeroTarjeta;
 		this.vencimiento = vencimiento;
 		this.cvv = cvv;
-		this.idUsuario = idUsuario;
-		
-		//Tarjeta.totalTarjeta++;
-       // this.idTarjeta = Tarjeta.totalTarjeta;
-	}//constructor
+		this.usuario = usuario;
+	}
 	
-	public Tarjeta() {}//constructor
-	
+	public Tarjeta() {}
+
+	public Long getId() {
+		return id;
+	}
 
 	public String getNombreTitular() {
 		return nombreTitular;
@@ -75,22 +78,25 @@ public class Tarjeta {
 		this.cvv = cvv;
 	}
 	
-	public Integer getIdUsuario() {
-		return idUsuario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 	
-	public void setIdUsuario(Integer idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
-
-	public Long getIdTarjeta() {
-		return idTarjeta;
+	
+	public List<Pago> getPagos() {
+		return pagos;
+	}
+	
+	public void setPagos(List<Pago> pagos) {
+		this.pagos = pagos;
 	}
 
 	@Override
 	public String toString() {
-		return "Tarjeta [idTarjeta=" + idTarjeta + ", nombreTitular=" + nombreTitular + ", numeroTarjeta="
-				+ numeroTarjeta + ", vencimiento=" + vencimiento + ", cvv=" + cvv + ", idUsuario=" + idUsuario + "]";
-	}//toString
-
-}//classProducto
+		return "Tarjeta [id=" + id + ", nombreTitular=" + nombreTitular + ", numeroTarjeta="
+				+ numeroTarjeta + ", vencimiento=" + vencimiento + ", cvv=" + cvv + "]";
+	}
+}

@@ -4,17 +4,21 @@ import java.util.List;
 import java.util.Optional;
 
 import org.clicLava.model.Tarjeta;
+import org.clicLava.model.Usuario;
 import org.clicLava.repository.TarjetaRepository;
+import org.clicLava.repository.UsuariosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TarjetaService {
-    private final  TarjetaRepository tarjetaRepository;
+    private final TarjetaRepository tarjetaRepository;
+    private final UsuariosRepository usuarioRepository;
     
     @Autowired
-    public TarjetaService(TarjetaRepository tarjetaRepository) {
+    public TarjetaService(TarjetaRepository tarjetaRepository, UsuariosRepository usuarioRepository) {
         this.tarjetaRepository = tarjetaRepository;
+        this.usuarioRepository = usuarioRepository;
     }//TarjetaService
 	
         
@@ -51,8 +55,8 @@ public class TarjetaService {
     
     // Actualizar tarjeta
     public Tarjeta updateTarjeta(Long idTarjeta, String nombreTitular, String numeroTarjeta, String vencimiento,
-			Integer cvv, Integer idUsuario) {
-    	Tarjeta tmp = null;
+            Integer cvv, Long idUsuario) {
+        Tarjeta tmp = null;
         
         if (tarjetaRepository.existsById(idTarjeta)) {
             Tarjeta tarjeta = tarjetaRepository.findById(idTarjeta).get();
@@ -61,13 +65,19 @@ public class TarjetaService {
             if (numeroTarjeta != null) tarjeta.setNumeroTarjeta(numeroTarjeta);
             if (vencimiento != null) tarjeta.setVencimiento(vencimiento);
             if (cvv != null) tarjeta.setCvv(cvv);
-            if (idUsuario != null) tarjeta.setIdUsuario(idUsuario);
+            // Corregir la asignación de usuario
+            if (idUsuario != null) {
+                Usuario usuario = usuarioRepository.findById(idUsuario).orElse(null);
+                if(usuario != null) {
+                    tarjeta.setUsuario(usuario);
+                }
+            }
             
             tarjetaRepository.save(tarjeta);
             tmp = tarjeta;
-        }//if
+        }
         return tmp;
-	}//updateProducto
+    }//updateTarjeta
     
 }//classTarjetaServices
 

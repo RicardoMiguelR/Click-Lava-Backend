@@ -2,8 +2,10 @@ package org.clicLava.controller;
 
 import java.util.List;
 
+import org.clicLava.dto.PagoDTO;
 import org.clicLava.model.Pago;
 import org.clicLava.service.PagoService;
+import org.clicLava.util.DTOConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,31 +30,36 @@ public class PagoController {
 
 
 	@GetMapping
-	public List<Pago>getPagos(){
-		return pagoService.getPagos();
+	public List<PagoDTO> getPagos(){
+		List<Pago> pagos = pagoService.getPagos();
+		return DTOConverter.convertToPagoDTOList(pagos);
 	}//getPagos
 	
 	@GetMapping(path="{pagoId}")//http://localhost:8080/api/pago/1
-	public Pago getPago(@PathVariable("pagoId") Long id){
-		return pagoService.getPago(id);
+	public PagoDTO getPago(@PathVariable("pagoId") Long id){
+		Pago pago = pagoService.getPago(id);
+		return DTOConverter.convertToDTO(pago);
 	}//getPago
 	
 		
 	@DeleteMapping(path="{pagoId}")//http://localhost:8080/api/pago/1
-	public Pago deletePago(@PathVariable("pagoId") Long id){
-		return pagoService.deletePago(id);
+	public PagoDTO deletePago(@PathVariable("pagoId") Long id){
+		Pago pago = pagoService.deletePago(id);
+		return DTOConverter.convertToDTO(pago);
 	}//deletePago
 	
 	@PostMapping
-	public Pago addPago(@RequestBody Pago pago){
-		return pagoService.addPago(pago);
+	public PagoDTO addPago(@RequestBody Pago pago){
+		Pago nuevoPago = pagoService.addPago(pago);
+		return DTOConverter.convertToDTO(nuevoPago);
 	}//addPago
 	
 	@PutMapping(path="{pagoId}")
-	public Pago updatePago(@PathVariable("pagoId") Long id,
+	public PagoDTO updatePago(@PathVariable("pagoId") Long id,
 			  @RequestParam(required = false) Double monto){
 		
-		return pagoService.updatePago(id,monto);
+		Pago pago = pagoService.updatePago(id,monto);
+		return DTOConverter.convertToDTO(pago);
 	}//updatePago
 	
 }//classPagoController
