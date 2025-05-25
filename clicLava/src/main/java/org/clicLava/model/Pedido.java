@@ -3,6 +3,9 @@ package org.clicLava.model;
 import javax.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "pedido")
 public class Pedido {
@@ -37,15 +40,16 @@ public class Pedido {
 	private Double total;
 	
 	// Relación con Usuario
+	@JsonBackReference(value = "usuario-pedidos")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario_fk", nullable = false)
 	private Usuario usuario;
 	
-	// Agregar relación One-to-Many con PedidoProducto
+	@JsonManagedReference(value = "pedido-productos")
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<PedidoProducto> pedidoProductos;
 	
-	// Relación inversa con Pago
+	@JsonManagedReference(value = "pedido-pago")
 	@OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Pago pago;
 	

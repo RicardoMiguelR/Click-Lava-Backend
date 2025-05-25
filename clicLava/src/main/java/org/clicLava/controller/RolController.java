@@ -1,10 +1,8 @@
 package org.clicLava.controller;
 
 import java.util.List;
-import org.clicLava.dto.RolDTO;
 import org.clicLava.service.RolService;
 import org.clicLava.model.Rol;
-import org.clicLava.util.DTOConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,34 +26,29 @@ public class RolController {
     }
     
     @GetMapping
-    public List<RolDTO> getRoles(){
-        List<Rol> roles = rolService.getRoles();
-        return DTOConverter.convertToRolDTOList(roles);
+    public List<Rol> getRoles(){
+        return rolService.getRoles();
     }
     
     @GetMapping(path = "{rolId}")
-    public RolDTO getRol(@PathVariable("rolId") Long id){
-        Rol rol = rolService.getRol(id);
-        return DTOConverter.convertToDTO(rol);
+    public Rol getRol(@PathVariable("rolId") Long id){
+        return rolService.getRol(id);
     }
     
     @DeleteMapping(path = "{rolId}")
-    public RolDTO deleteRol(@PathVariable("rolId") Long id){
-        Rol rol = rolService.deleteRol(id);
-        return DTOConverter.convertToDTO(rol);
+    public Rol deleteRol(@PathVariable("rolId") Long id){
+        return rolService.deleteRol(id);
     }
     
     @PostMapping
-    public RolDTO addRol(@RequestBody Rol rol){
-        Rol nuevoRol = rolService.addRol(rol);
-        return DTOConverter.convertToDTO(nuevoRol);
+    public Rol addRol(@RequestBody Rol rol){
+        return rolService.addRol(rol);
     }
     
     @PutMapping(path = "{rolId}")
-    public RolDTO updateRol(@PathVariable("rolId") Long id,
+    public Rol updateRol(@PathVariable("rolId") Long id,
         @RequestParam(required = false) String rol){
         
-        Rol rolActualizado = rolService.updateRol(id, rol);
-        return DTOConverter.convertToDTO(rolActualizado);
+        return rolService.updateRol(id, rol);
     }
 }

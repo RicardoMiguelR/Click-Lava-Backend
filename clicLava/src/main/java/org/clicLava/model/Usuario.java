@@ -3,6 +3,9 @@ package org.clicLava.model;
 import javax.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -31,14 +34,16 @@ public class Usuario {
 	private String fechaRegistro;
 	
 	// Relación con Rol
+	@JsonBackReference(value = "usuario-rol")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idRol_fk", nullable = false)
 	private Rol rol;
 	
-	// Relaciones inversas
+	@JsonManagedReference(value = "usuario-tarjetas")
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Tarjeta> tarjetas;
 	
+	@JsonManagedReference(value = "usuario-pedidos")
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Pedido> pedidos;
 	

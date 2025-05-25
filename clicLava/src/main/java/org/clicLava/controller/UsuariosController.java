@@ -3,10 +3,8 @@ package org.clicLava.controller;
 import java.util.List;
 
 import org.clicLava.dto.ChangePassword;
-import org.clicLava.dto.UsuarioDTO;
 import org.clicLava.model.Usuario;
 import org.clicLava.service.UsuariosService;
-import org.clicLava.util.DTOConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(path = "/api/usuarios/")  // http://localhost:8080/api/usuario/
+@RequestMapping(path = "/api/usuarios/")  // http://localhost:8080/api/usuarios/
 public class UsuariosController {
     
     private final UsuariosService usuariosService;
@@ -31,35 +29,30 @@ public class UsuariosController {
     } // constructor 
 
     @GetMapping
-    public List<UsuarioDTO> getUsuarios() {
-        List<Usuario> usuarios = usuariosService.getUsuarios();
-        return DTOConverter.convertToUsuarioDTOList(usuarios);
+    public List<Usuario> getUsuarios() {
+        return usuariosService.getUsuarios();
     } // getUsuarios
     
     @GetMapping(path = "{id}") // Traer un solo usuario por su ID
-    // http://localhost:8080/api/usuario/1
-    public UsuarioDTO getUsuario(@PathVariable("id") Long id) {
-        Usuario usuario = usuariosService.getUsuario(id);
-        return DTOConverter.convertToDTO(usuario);
+    // http://localhost:8080/api/usuarios/1
+    public Usuario getUsuario(@PathVariable("id") Long id) {
+        return usuariosService.getUsuario(id);
     } // getUsuario
     
-    @DeleteMapping(path = "{id}") // Traer un solo usuario por su ID
-    // http://localhost:8080/api/idUsuario/1
-    public UsuarioDTO deleteUsuario(@PathVariable("id") Long id) {
-        Usuario usuario = usuariosService.deleteUsuario(id);
-        return DTOConverter.convertToDTO(usuario);
+    @DeleteMapping(path = "{id}") // Eliminar un usuario por su ID
+    // http://localhost:8080/api/usuarios/1
+    public Usuario deleteUsuario(@PathVariable("id") Long id) {
+        return usuariosService.deleteUsuario(id);
     } // deleteUsuario
     
     @PostMapping // Agregar un solo usuario 
-    public UsuarioDTO addUsuario(@RequestBody Usuario usuario) {
-        Usuario nuevoUsuario = usuariosService.addUsuario(usuario);
-        return DTOConverter.convertToDTO(nuevoUsuario);
+    public Usuario addUsuario(@RequestBody Usuario usuario) {
+        return usuariosService.addUsuario(usuario);
     } // addUsuario
     
     @PutMapping(path = "{id}") // Modificar un usuario 
-    public UsuarioDTO updateUsuario(@PathVariable("id") Long id, @RequestBody ChangePassword changePassword) {
-        Usuario usuario = usuariosService.updateUsuario(id, changePassword);
-        return DTOConverter.convertToDTO(usuario);
-    } // updateUsuario
+    public Usuario updateUsuario(@PathVariable("id") Long id, @RequestBody ChangePassword usuario) {
+        return usuariosService.updateUsuario(id, usuario);
+    }
     
 } // UsuarioController
