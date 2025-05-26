@@ -53,11 +53,11 @@ public class ProductoController {
 	// Actualizar por medio de RequestParams ->
 	@PutMapping(path = "{prodId}")
 	public Producto updateProducto(@PathVariable("prodId") Long id,
-			@RequestParam String nombre,
-			@RequestParam String descripcion,
-			@RequestParam Double precio,
-			@RequestParam Integer stock,
-			@RequestParam String imagen) {
+			@RequestParam (required = false) String nombre,
+			@RequestParam (required = false) String descripcion,
+			@RequestParam (required = false) Double precio,
+			@RequestParam (required = false) Integer stock,
+			@RequestParam (required = false) String imagen) {
 		return productoService.updateProduct(id, nombre, descripcion, precio, stock, imagen);
 	}
 

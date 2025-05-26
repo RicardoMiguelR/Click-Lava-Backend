@@ -33,7 +33,6 @@ public class Usuario {
 	// 1. Constructor
 	public Usuario(String nombre, String apellidos, String email, String password, String telefono,
 			String fechaRegistro, Long idRol) {
-		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
