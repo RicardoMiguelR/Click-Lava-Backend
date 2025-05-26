@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/api/productos")
+@RequestMapping(path = "/api/productos/")
 public class ProductoController {
 	
 	private final ProductoService productoService;
@@ -37,19 +37,6 @@ public class ProductoController {
 		return productoService.addProducto(producto);
 	}
 	
-	/* // Actualizar por medio de RequestBody ->
-	@PutMapping(path = "{prodId}")
-	public Producto updateProducto(@PathVariable("prodId") Long id, @RequestBody Producto producto) {
-		return productoService.updateProduct(
-				id,
-				producto.getNombre(),
-				producto.getDescripcion(),
-				producto.getPrecio(),
-				producto.getStock(),
-				producto.getImagen()
-		);
-	} */
-	
 	// Actualizar por medio de RequestParams ->
 	@PutMapping(path = "{prodId}")
 	public Producto updateProducto(@PathVariable("prodId") Long id,
@@ -60,5 +47,4 @@ public class ProductoController {
 			@RequestParam String imagen) {
 		return productoService.updateProduct(id, nombre, descripcion, precio, stock, imagen);
 	}
-
 }

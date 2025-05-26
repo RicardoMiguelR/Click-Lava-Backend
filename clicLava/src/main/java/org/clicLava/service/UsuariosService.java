@@ -54,12 +54,12 @@ public class UsuariosService {
 		} // if isEmpty
 	} // addUsuario
 
-	public Usuario updateUsuario(Long id, ChangePassword changePassword) {
+	public Usuario updateUsuario(Long id, ChangePassword usuario) {
 		Usuario user = null;
 		if (usuariosRepository.existsById(id)) {
 			user = usuariosRepository.findById(id).get();
-			if (encoder.matches(changePassword.getPassword(), user.getPassword())) {
-				user.setPassword(encoder.encode(changePassword.getNpassword()));
+			if (encoder.matches(usuario.getPassword(), user.getPassword())) {
+				user.setPassword(encoder.encode(usuario.getNpassword()));
 				usuariosRepository.save(user);
 			} else {
 				user = null;

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path="/pedidoproducto/")
+@RequestMapping(path="/api/pedido-productos/")
 public class PedidoProductoController {
 
     private final PedidoProductoService ppService;

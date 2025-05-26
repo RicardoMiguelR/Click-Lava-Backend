@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/api/tarjeta/")  // http://localhost:8080/api/tarjeta/
+@RequestMapping(path = "/api/tarjetas/")  // http://localhost:8080/api/tarjetas/
 public class TarjetaController {
     private final TarjetaService tarjetaService;
     
@@ -30,12 +30,12 @@ public class TarjetaController {
         return tarjetaService.getTarjetas();
     }
     
-    @GetMapping(path = "{idTarjeta}") // Traer una sola tarjeta por su ID  http://localhost:8080/api/tarjeta/1
+    @GetMapping(path = "{idTarjeta}") // Traer una sola tarjeta por su ID  http://localhost:8080/api/tarjetas/1
     public Tarjeta getTarjeta(@PathVariable("idTarjeta") Long idTarjeta) {
         return tarjetaService.getTarjeta(idTarjeta);
     } // getTarjeta
     
-    @DeleteMapping(path = "{idTarjeta}") // Eliminar una tarjeta por su ID http://localhost:8080/api/tarjeta/1
+    @DeleteMapping(path = "{idTarjeta}") // Eliminar una tarjeta por su ID http://localhost:8080/api/tarjetas/1
     public Tarjeta deleteTarjeta(@PathVariable("idTarjeta") Long idTarjeta) {
         return tarjetaService.deleteTarjeta(idTarjeta);
     } // deleteTarjeta
@@ -51,7 +51,7 @@ public class TarjetaController {
             @RequestParam(required = false) String numeroTarjeta, 
             @RequestParam(required = false) String vencimiento, 
             @RequestParam(required = false) Integer cvv,
-            @RequestParam(required = false) Integer idUsuario){
+            @RequestParam(required = false) Long idUsuario){ // Cambiar de Integer a Long
         return tarjetaService.updateTarjeta(idTarjeta, nombreTitular, numeroTarjeta, vencimiento, cvv, idUsuario);
     } // updateTarjeta
     

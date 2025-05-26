@@ -1,71 +1,93 @@
 package org.clicLava.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@Entity//esto es una entidad
-@Table(name="pago")//cambio de nombre en l tabla pago
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+@Entity
+@Table(name = "pago")
 public class Pago {
-	@Id//Indica al Id que es un campo Id
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name ="id", unique= true, nullable = false)
+	@Column(name = "idPago", unique = true, nullable = false)
 	private Long id;
+	
 	@Column(nullable = false)
 	private Double monto;
+	
 	@Column(nullable = false)
-	private String  fecha;
-	private Integer idTarjeta;
-	private Integer idPedido;
+	private String fechaPago;
 	
+	// Relación con Tarjeta
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idTarjeta_fk", nullable = false)
+	private Tarjeta tarjeta;
 	
-public Pago(Double monto, String fecha, 
-		Integer idTarjeta, Integer idPedido) {
+	// Relación con Pedido
+	@JsonBackReference(value = "pedido-pago")
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idPedido_fk", nullable = false)
+	private Pedido pedido;
+
 	
+	public Pago(Double monto, String fechaPago, Tarjeta tarjeta, Pedido pedido) {
 		this.monto = monto;
-		this.fecha = fecha;
-		this.idTarjeta = idTarjeta;
-		this.idPedido = idPedido;
-		}//constructor
+		this.fechaPago = fechaPago;
+		this.tarjeta = tarjeta;
+		this.pedido = pedido;
+	}
 	
-	public Pago() {}//constructor vacio
+	public Pago() {}
 	
-	///////////Getters and Setters///////////	
-	public Double getMonto() {
-		return monto;
-	}//getMonto
-	public void setMonto(Double monto) {
-		this.monto = monto;
-	}//setMonto
-	public String getFecha() {
-		return fecha;
-	}//getFecha
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-	}//setFecha
-	public Integer getIdTarjeta() {
-		return idTarjeta;
-	}//getIdTarjeta
-	public void setIdTarjeta(Integer idTarjeta) {
-		this.idTarjeta = idTarjeta;
-	}//setIdTarjeta
-	public Integer getIdPedido() {
-		return idPedido;
-	}//getIdPedido
-	public void setIdPedido(Integer idPedido) {
-		this.idPedido = idPedido;
-	}//setIdPedido
 	public Long getId() {
 		return id;
-	}//getId
+	}
+
+	public Double getMonto() {
+		return monto;
+	}
+
+	public void setMonto(Double monto) {
+		this.monto = monto;
+	}
+
+	public String getFechaPago() {
+		return fechaPago;
+	}
+
+	public void setFechaPago(String fechaPago) {
+		this.fechaPago = fechaPago;
+	}
 	
+	public Tarjeta getTarjeta() {
+		return tarjeta;
+	}
+	
+	public void setTarjeta(Tarjeta tarjeta) {
+		this.tarjeta = tarjeta;
+	}
+	
+	public Pedido getPedido() {
+		return pedido;
+	}
+	
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+	
+	public void setPago(Pedido pedido) {
+		if (pedido == null) {
+	        if (this.pedido != null) {
+	            this.pedido.setPago(null);
+	        }
+	    } else {
+	        pedido.setPago(this);
+	    }
+	    this.pedido = pedido;
+	}
+
 	@Override
 	public String toString() {
-		return "Pago [id=" + id + ", monto=" + monto + ", fecha=" + fecha + ", idTarjeta=" + idTarjeta + ", idPedido="
-				+ idPedido + "]";
-	}//toString
-	
-}//ClassPago
+		return "Pago [id=" + id + ", monto=" + monto + ", fechaPago=" + fechaPago + "]";
+	}
+}
