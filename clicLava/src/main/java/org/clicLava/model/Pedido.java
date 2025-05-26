@@ -157,6 +157,13 @@ public class Pedido {
 	}
 	
 	public void setPago(Pago pago) {
+		if (pago == null) {
+			if (this.pago != null) {
+				this.pago.setPedido(null);
+				}
+			} else {
+				pago.setPedido(this);
+				}
 		this.pago = pago;
 	}
 

@@ -1,6 +1,9 @@
 package org.clicLava.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.List;
 
 @Entity
@@ -24,6 +27,7 @@ public class Tarjeta {
 	private Integer cvv;
 	
 	// Relación con Usuario
+	@JsonBackReference(value = "usuario-tarjetas")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUsuario_fk", nullable = false)
 	private Usuario usuario;

@@ -1,6 +1,9 @@
 package org.clicLava.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 
 @Entity
@@ -28,6 +31,7 @@ public class Producto {
 	private String imagen;
 	
 	// Agregar relación One-to-Many con PedidoProducto
+	@JsonManagedReference(value = "producto-pedidos")
 	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<PedidoProducto> pedidoProductos;
 	

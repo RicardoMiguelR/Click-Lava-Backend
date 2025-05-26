@@ -2,6 +2,8 @@ package org.clicLava.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "pago")
 public class Pago {
@@ -22,9 +24,11 @@ public class Pago {
 	private Tarjeta tarjeta;
 	
 	// Relación con Pedido
+	@JsonBackReference(value = "pedido-pago")
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idPedido_fk", nullable = false)
 	private Pedido pedido;
+
 	
 	public Pago(Double monto, String fechaPago, Tarjeta tarjeta, Pedido pedido) {
 		this.monto = monto;
@@ -69,6 +73,17 @@ public class Pago {
 	
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
+	}
+	
+	public void setPago(Pedido pedido) {
+		if (pedido == null) {
+	        if (this.pedido != null) {
+	            this.pedido.setPago(null);
+	        }
+	    } else {
+	        pedido.setPago(this);
+	    }
+	    this.pedido = pedido;
 	}
 
 	@Override

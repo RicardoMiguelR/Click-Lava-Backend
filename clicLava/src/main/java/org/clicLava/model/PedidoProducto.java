@@ -2,6 +2,8 @@ package org.clicLava.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "pedido_producto")
 public class PedidoProducto {
@@ -11,10 +13,14 @@ public class PedidoProducto {
     @Column(name = "idPedidoProducto", unique = true, nullable = false)
     private Long idPedidoProducto;
     
+    // Relación con Pedido
+    @JsonBackReference(value = "pedido-productos")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idPedido_fk", nullable = false)
     private Pedido pedido;
     
+    // Relación con Producto
+    @JsonBackReference(value = "producto-pedidos")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idProducto_fk", nullable = false)
     private Producto producto;
