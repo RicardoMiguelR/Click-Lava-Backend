@@ -1,142 +1,176 @@
 package org.clicLava.model;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
+import javax.persistence.*;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name = "pedidos")
+@Table(name = "pedido")
 public class Pedido {
 
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-@Column(name = "id",  nullable = false)	
-		private Long id;
-        @Column (nullable=false)
-		private String calle;
-        @Column (nullable=false)
-		private String colonia;
-        @Column (nullable=false)
-		private String municipio;
-        @Column (nullable=false)
-		private String codigoPostal;
-        @Column (nullable=false)
-		private String fechaPedido;
-        @Column (nullable=false)
-		private Double cantidad;
-        @Column (nullable=false)
-		private String tiempo;
-        @Column (nullable=false)
-		private Long idUsuario;
-        
-		public Pedido(String calle, String colonia, String municipio, String codigoPostal, String fechaPedido,
-				Double cantidad, String tiempo, Long idUsuario) {
-			super();
-			this.calle = calle;
-			this.colonia = colonia;
-			this.municipio = municipio;
-			this.codigoPostal = codigoPostal;
-			this.fechaPedido = fechaPedido;
-			this.cantidad = cantidad;
-			this.tiempo = tiempo;
-			this.idUsuario = idUsuario;
-			
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idPedido", nullable = false)
+	private Long id;
+	
+	@Column(nullable = false)
+	private String calle;
+	
+	@Column(nullable = false)
+	private String colonia;
+	
+	@Column(nullable = false)
+	private String municipio;
+	
+	@Column(nullable = false)
+	private String codigoPostal;
+	
+	@Column(nullable = false)
+	private String fechaPedido;
+	
+	@Column(nullable = false)
+	private Integer cantidad;
+	
+	@Column(nullable = false)
+	private String tiempo;
+	
+	@Column(nullable = true) // Puedes cambiar a false si es obligatorio
+	private Double total;
+	
+	// Relación con Usuario
+	@JsonBackReference(value = "usuario-pedidos")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idUsuario_fk", nullable = false)
+	private Usuario usuario;
+	
+	@JsonManagedReference(value = "pedido-productos")
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<PedidoProducto> pedidoProductos;
+	
+	@JsonManagedReference(value = "pedido-pago")
+	@OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Pago pago;
+	
+	public Pedido(String calle, String colonia, String municipio, String codigoPostal, String fechaPedido,
+			Integer cantidad, String tiempo, Usuario usuario) {
+		this.calle = calle;
+		this.colonia = colonia;
+		this.municipio = municipio;
+		this.codigoPostal = codigoPostal;
+		this.fechaPedido = fechaPedido;
+		this.cantidad = cantidad;
+		this.tiempo = tiempo;
+		this.usuario = usuario;
+	}
+	
+	public Pedido() {}
+	
+	public Long getId() {
+		return id;
+	}
 
-		}//constructor
-		
-		public Pedido() {} //Constructor vacío
-		
-		//Getters and setters
+	public String getCalle() {
+		return calle;
+	}
 
-		public String getCalle() {
-			return calle;
-		}//get Calle
+	public void setCalle(String calle) {
+		this.calle = calle;
+	}
 
-		public void setCalle(String calle) {
-			this.calle = calle;
-		}// set Calle
+	public String getColonia() {
+		return colonia;
+	}
 
-		public String getColonia() {
-			return colonia;
-		}//get Colonia
+	public void setColonia(String colonia) {
+		this.colonia = colonia;
+	}
 
-		public void setColonia(String colonia) {
-			this.colonia = colonia;
-		}// set Colonia
+	public String getMunicipio() {
+		return municipio;
+	}
 
-		public String getMunicipio() {
-			return municipio;
-		}//get Municipio
+	public void setMunicipio(String municipio) {
+		this.municipio = municipio;
+	}
 
-		public void setMunicipio(String municipio) {
-			this.municipio = municipio;
-		}// set Municipio
+	public String getCodigoPostal() {
+		return codigoPostal;
+	}
 
-		public String getCodigoPostal() {
-			return codigoPostal;
-		}// get Código postal
+	public void setCodigoPostal(String codigoPostal) {
+		this.codigoPostal = codigoPostal;
+	}
 
-		public void setCodigoPostal(String codigoPostal) {
-			this.codigoPostal = codigoPostal;
-		}// set Código Postal
+	public String getFechaPedido() {
+		return fechaPedido;
+	}
 
-		public String getFechaPedido() {
-			return fechaPedido;
-		}//get Fecha pedido
+	public void setFechaPedido(String fechaPedido) {
+		this.fechaPedido = fechaPedido;
+	}
 
-		public void setFechaPedido(String fechaPedido) {
-			this.fechaPedido = fechaPedido;
-		}// set fechaPedido
+	public Integer getCantidad() {
+		return cantidad;
+	}
 
-		public Double getCantidad() {
-			return cantidad;
-		}//get Cantidad
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
 
-		public void setCantidad(Double cantidad) {
-			this.cantidad = cantidad;
-		}// set Cantidad
+	public String getTiempo() {
+		return tiempo;
+	}
 
-		public String getTiempo() {
-			return tiempo;
-		}//get Tiempo
+	public void setTiempo(String tiempo) {
+		this.tiempo = tiempo;
+	}
+	
+	public Double getTotal() {
+		return total;
+	}
+	
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	// Agregar estos métodos
+	public List<PedidoProducto> getPedidoProductos() {
+		return pedidoProductos;
+	}
+	
+	public void setPedidoProductos(List<PedidoProducto> pedidoProductos) {
+		this.pedidoProductos = pedidoProductos;
+	}
+	
+	public Pago getPago() {
+		return pago;
+	}
+	
+	public void setPago(Pago pago) {
+		if (pago == null) {
+			if (this.pago != null) {
+				this.pago.setPedido(null);
+				}
+			} else {
+				pago.setPedido(this);
+				}
+		this.pago = pago;
+	}
 
-		public void setTiempo(String tiempo) {
-			this.tiempo = tiempo;
-		}//set tiempo
-
-		public Long getIdUsuario() {
-			return idUsuario;
-		}//get idUsuario
-
-		public void setIdUsuario(Long idUsuario) {
-			this.idUsuario = idUsuario;
-		}
-		// set id Usuario
-		public Long getId() {
-			return id;
-		}//get id
-		
-		//Fin getters and setters
-
-
-		@Override
-		public String toString() {
-			return "Pedido [id=" + id + ", calle=" + calle + ", colonia=" + colonia + ", municipio=" + municipio
-					+ ", codigoPostal=" + codigoPostal + ", fechaPedido=" + fechaPedido + ", cantidad=" + cantidad
-					+ ", tiempo=" + tiempo + ", idUsuario=" + idUsuario + "]";
-		}//toString
-		
-		
-
-		
-		
-		
-		
-		
-		
-		
-
-}//Pedido
+	@Override
+	public String toString() {
+		return "Pedido [id=" + id + ", calle=" + calle + ", colonia=" + colonia + ", municipio=" + municipio
+				+ ", codigoPostal=" + codigoPostal + ", fechaPedido=" + fechaPedido + ", cantidad=" + cantidad
+				+ ", tiempo=" + tiempo + "]";
+	}
+}

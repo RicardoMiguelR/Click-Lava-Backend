@@ -1,118 +1,146 @@
 package org.clicLava.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "usuario")
 public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "idUsuario", unique = true, nullable = false)
 	private Long id;
+	
 	@Column(nullable = false)
 	private String nombre;
+	
 	@Column(nullable = false)
 	private String apellidos;
+	
 	@Column(nullable = false)
 	private String email;
+	
 	@Column(nullable = false)
 	private String password;
+	
 	@Column(nullable = false)
 	private String telefono;
+	
 	@Column(nullable = false)
 	private String fechaRegistro;
-	@Column(nullable = false)
-	private Long idRol;
-		
-	// 1. Constructor
+	
+	// Relación con Rol
+	@JsonBackReference(value = "usuario-rol")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idRol_fk", nullable = false)
+	private Rol rol;
+	
+	@JsonManagedReference(value = "usuario-tarjetas")
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Tarjeta> tarjetas;
+	
+	@JsonManagedReference(value = "usuario-pedidos")
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Pedido> pedidos;
+	
+	// Constructores
 	public Usuario(String nombre, String apellidos, String email, String password, String telefono,
-			String fechaRegistro, Long idRol) {
+			String fechaRegistro, Rol rol) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
 		this.password = password;
 		this.telefono = telefono;
 		this.fechaRegistro = fechaRegistro;
-		this.idRol = idRol;
-	} // constructor
+		this.rol = rol;
+	}
 	
-	public Usuario() {
-	} // constructor vacio
+	public Usuario() {}
 
-	// 2. Getter and Setters
+	// Getters y Setters
+	public Long getId() {
+		return id;
+	}
+
 	public String getNombre() {
 		return nombre;
-	} // getNombre
+	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	} // setNombre
+	}
 	
 	public String getApellidos() {
 		return apellidos;
-	} // getApellidos
+	}
 
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
-	} // setApellidos
+	}
 
 	public String getEmail() {
 		return email;
-	} // getEmail
+	}
 
 	public void setEmail(String email) {
 		this.email = email;
-	} // setEmail
+	}
 
 	public String getPassword() {
 		return password;
-	} // getPassword
+	}
 
 	public void setPassword(String password) {
 		this.password = password;
-	} // setPassword
+	}
 
 	public String getTelefono() {
 		return telefono;
-	} // getTelefono
+	}
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
-	} // setTelefono
+	}
 
 	public String getFechaRegistro() {
 		return fechaRegistro;
-	} // getFechaRegistro
+	}
 
 	public void setFechaRegistro(String fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
-	} // setFechaRegistro
+	}
 
-	public Long getIdRol() {
-		return idRol;
-	} // getIdRol
+	public Rol getRol() {
+		return rol;
+	}
 	
-	public void setIdRol(Long idRol) {
-		this.idRol = idRol;
-	} // setIdRol
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
 	
-	public Long getId() {
-		return id;
-	} // getId
+	public List<Tarjeta> getTarjetas() {
+		return tarjetas;
+	}
+	
+	public void setTarjetas(List<Tarjeta> tarjetas) {
+		this.tarjetas = tarjetas;
+	}
+	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+	
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 
-	// 3. toString()
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
-				+ ", password=" + password + ", telefono=" + telefono + ", fechaRegistro=" + fechaRegistro + ", idRol="
-				+ idRol + "]";
+				+ ", telefono=" + telefono + ", fechaRegistro=" + fechaRegistro + ", rol=" + rol + "]";
 	}
-
-	
-} // Usiario 
+}

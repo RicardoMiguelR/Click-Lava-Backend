@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path="/api/pago")//http://localhost:8080/api/pago
+@RequestMapping(path="/api/pagos/")//http://localhost:8080/api/pagos/
 public class PagoController {
 	
 	private final PagoService pagoService;
@@ -28,17 +28,17 @@ public class PagoController {
 
 
 	@GetMapping
-	public List<Pago>getPagos(){
+	public List<Pago> getPagos(){
 		return pagoService.getPagos();
 	}//getPagos
 	
-	@GetMapping(path="{pagoId}")//http://localhost:8080/api/pago/1
+	@GetMapping(path="{pagoId}")//http://localhost:8080/api/pagos/1
 	public Pago getPago(@PathVariable("pagoId") Long id){
 		return pagoService.getPago(id);
 	}//getPago
 	
 		
-	@DeleteMapping(path="{pagoId}")//http://localhost:8080/api/pago/1
+	@DeleteMapping(path="{pagoId}")//http://localhost:8080/api/pagos/1
 	public Pago deletePago(@PathVariable("pagoId") Long id){
 		return pagoService.deletePago(id);
 	}//deletePago
