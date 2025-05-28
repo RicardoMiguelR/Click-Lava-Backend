@@ -103,13 +103,13 @@ class ClicLavaApplicationTests {
 	@Disabled("Probado una vez, deshabilitado para subsecuentes ocaciones, descomentar o comentar cuando sea necesario")
 	@DisplayName("Se prueba crear un producto del endpoint http://localhost:8080/api/usuarios/")
 	void pruebaPOSTUsuario() throws Exception {
-		Usuario user = new Usuario("Edu",
+		/* Usuario user = new Usuario("Edu", <-- arreglar detalle por propiedades del constructor, descomentar para modificar (chamba de Seniors Edu y Ray)
 				"El Senior del team",
 				"edu@email.com",
 				"edu",
 				"3425587572",
 				"2025-05-26",
-				3L);
+				3); */
 		this.mockMvc.perform(post("/api/usuarios/")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(asJsonStringUsuario(user)))
