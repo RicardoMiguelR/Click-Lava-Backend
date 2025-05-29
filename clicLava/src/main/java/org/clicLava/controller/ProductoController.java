@@ -32,6 +32,7 @@ public class ProductoController {
 		return productoService.deleteProduct(id);
 	}
 	
+	
 	@PostMapping()
 	public Producto addProducto(@RequestBody Producto producto) {
 		return productoService.addProducto(producto);

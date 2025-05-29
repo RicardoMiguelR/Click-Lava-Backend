@@ -1,0 +1,43 @@
+.logo {
+  width: 200px;
+  height: 200px;
+  text-align: center;
+}
+
+.containerLogo {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#encabezado1, #encabezado2 {
+  font-family: "Grandstander", cursive;
+}
+
+.mb-3 {
+  margin-top: 1rem;
+}
+
+.button {
+  border: #feb36d;
+  background-color: #feb36d;
+  text-align: center;
+  color: #00375e;
+  font-family: "Inter", sans-serif;
+}
+
+div.form-check {
+  font-family: "Inter", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-check-input {
+  border: 0.25px solid #00375e;
+}
+
+.col-md-6, .mb-4 {
+  font-family: "Inter", sans-serif;
+  color: #00375e !important;
+}

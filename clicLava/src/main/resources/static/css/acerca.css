@@ -1,0 +1,96 @@
+.card {
+    background-color: transparent !important;
+    border: none !important;
+    color: var(--lt-color);
+    font-family: "Grandstander", cursive;
+    border-radius: 1rem;
+    text-align: center;
+}
+
+.card img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.card-title {
+    font-family: "Grandstander", cursive;
+    font-size: 22px;
+}
+
+.card-text {
+    font-family: "Inter", sans-serif;
+    font-size: 18px;
+    text-align: justify;
+}
+
+h3 {
+    color: var(--lt-color);
+    font-family: "Grandstander", cursive;
+    font-size: 24px;
+}
+
+.card-img-top {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.img-fluid {
+    width: 600px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.nombreEquipo {
+    font-size: 18px;
+}
+
+.resumen {
+    font-size: 16px;
+    text-align: center;
+}
+
+.backTitle {
+    background-color: #bdddf4;
+    color: #00375e;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.btn-carrito {
+    color: #fff;
+    background-color: #FD8F3E;
+    border: 1px solid #FD8F3E;
+}
+
+.btn-carrito:hover {
+    background-color: #FD8F3E;
+    border-color: #FD8F3E;
+}
+
+.btn-carrito:focus,
+.btn-carrito.focus {
+    box-shadow: 0 0 0 0.25rem #FD8F3E;
+}
+
+.btn-carrito:disabled,
+.btn-carrito.disabled {
+    background-color: #FD8F3E;
+    border-color: #FD8F3E;
+    opacity: 0.65;
+}
+
+.btn-carrito:not(:disabled):not(.disabled):active,
+.btn-carrito:not(:disabled):not(.disabled).active,
+.show>.btn-carrito.dropdown-toggle {
+    background-color: #FD8F3E;
+    border-color: #FD8F3E;
+}
+
+.img-no-alterar {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}

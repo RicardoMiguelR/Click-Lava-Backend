@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(path = "/api/usuarios/")  // http://localhost:8080/api/usuarios/
+@RequestMapping("/13.58.208.54/api/usuarios") // http://localhost:8080/api/usuarios/
 public class UsuariosController {
     
     private final UsuariosService usuariosService;

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="img/jpg" href="../assets/icons/logo_clic_lava.png" />
+    <title>Inicio</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+    <!-- Google Fonts (combinadas en una sola solicitud) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Hojas de estilo -->
+    <link rel="stylesheet" href="../css/acerca.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+    <!-- Barra de navegación -->
+    <nav id="navegacion" class="navbar navbar-expand-lg bg-body-tertiary"></nav>
+
+    <main class="container-fluid">
+
+      <!-- Carrusel -->
+      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        
+        
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              src="../assets/img/lavadora_1.webp"
+              class="d-block w-100"
+              alt="Servicio de renta de lavadoras"
+            />
+          </div>
+
+          <div class="carousel-item">
+            <img
+              src="../assets/img/lavadora-2.webp"
+              class="d-block w-100"
+              alt="Renta de lavadoras ahorra tiempo y espacio"
+            />
+          </div>
+
+          <div class="carousel-item">
+            <img
+              src="../assets/img/lavadora-3.webp"
+              class="d-block w-100"
+              alt="Renta de lavadoras por días, horas o meses"
+            />
+          </div>
+        </div>
+        <br>
+        <button
+          class="carousel-control-prev"
+          type="button prev"
+          data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+
+        <button
+          class="carousel-control-next"
+          type="button next"
+          data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+        </button>
+      </div>
+       <!-- Inicio de Quienes somos -->
+       <div class="row align-items-center">
+        <div class="col-12 col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Acerca de nosotros</h5>
+              <p class="card-text">
+                Buscamos solucionar la problemática que existe en la falta de
+                equipos competentes en el área de lavado doméstico, ya sean
+                personas con equipos obsoletos que hagan un gasto excesivo de
+                energía (agua, electricidad) o personas que no cuenten con un
+                equipo para lavar su ropa. Nuestra solución es ofrecer renta de
+                equipos a precios accesibles o venta de los mismos y poder así
+                brindar la oportunidad de realizar algo tan básico como es lavar
+                tu ropa.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <div class="card border-0">
+            <div class="card-body">
+              <img src="../assets/img/mujer_lavadora.png" alt="Familia" class="img-fluid"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fin de Quienes somos -->
+
+      <!-- Sección de Servicios -->
+      <section class="my-5">
+        <div class="row align-items-center">
+          <div class="col-12 col-md-6">
+            <div class="card border-0">
+              <div class="card-body">
+                <img src="../assets/img/hombre_lavadora.webp" alt="Icono de servicios" class="img-fluid" />
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h2 class="card-title">Servicio</h2>
+                <p class="card-text">
+                  Trabajamos los 365 días del año para mejorar la experiencia de
+                  nuestros clientes, contando con domótica en todas nuestras
+                  tiendas para asegurar la respuesta rápida ante cualquier
+                  eventualidad.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección del Equipo -->
+      <section class="my-5 py-5">
+        <div class="container text-center mb-5">
+          <h2 class="backTitle">Conoce al equipo</h2>
+        </div>
+
+        <!-- Primera fila de tarjetas -->
+        <div class="row g-4">
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card h-100">
+              <img src="../assets/img/integrantes/ana.webp" class="card-img-top" alt="Ana Gabriela García García" />
+              <div class="card-body">
+                <h3 class="card-title nombreEquipo">Ana Gabriela García García</h3>
+                <p class="card-text resumen">
+                  Desarrolladora Java Full Stack, con experiencia en la creación
+                  de aplicaciones web.
+                </p>
+                <div style="margin: 0; display: flex; justify-content: center; gap: 1.5rem;">
+                  <a href="https://www.linkedin.com/in/ana-gabriela-garc%C3%ADa-garc%C3%ADa-51227b204/" target="blank">
+                    <img src="../assets/icons/linkedin.webp" style="width:2rem; margin: 0;">
+                  </a>
+                  <a href="https://github.com/gabs-g" target="blank">
+                    <img src="../assets/icons/github.webp" style="width:2rem; margin: 0;">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card h-100">
+              <img src="../assets/img/integrantes/eduardo.webp" class="card-img-top" alt="Eduardo Martínez Juárez" />
+              <div class="card-body">
+                <h3 class="card-title nombreEquipo">Eduardo Martínez Juárez</h3>
+                <p class="card-text resumen">
+                  Desarrollador Java Full Stack con experiencia en la creación y
+                  desarrollo de aplicaciones web.
+                </p>
+                <div style="margin: 0; display: flex; justify-content: center; gap: 1.5rem;">
+                  <a href="https://www.linkedin.com/in/eduardo-mtzjrz/" target="blank">
+                    <img src="../assets/icons/linkedin.webp" style="width:2rem; margin: 0;">
+                  </a>
+                  <a href="https://github.com/Eduardo-Mtz-Jrz" target="blank">
+                    <img src="../assets/icons/github.webp" style="width:2rem; margin: 0;">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card h-100">
+              <img src="../assets/img/integrantes/jesus.webp" class="card-img-top" alt="Jesus Galicia Rueda" />
+              <div class="card-body">
+                <h3 class="card-title nombreEquipo">Jesús Galicia Rueda</h3>
+                <p class="card-text resumen">
+                  Desarrollador Java Full Stack con experiencia en desarrollo
+                  web. Interesado por la innovación.
+                </p>
+                <div style="margin: 0; display: flex; justify-content: center; gap: 1.5rem;">
+                  <a href="https://www.linkedin.com/in/jesus-galicia-b31a052a2/" target="blank">
+                    <img src="../assets/icons/linkedin.webp" style="width:2rem; margin: 0;">
+                  </a>
+                  <a href="https://github.com/Jesus-rg95" target="blank">
+                    <img src="../assets/icons/github.webp" style="width:2rem; margin: 0;">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+     
+
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card h-100">
+              <img src="../assets/img/integrantes/karla.webp" class="card-img-top" alt="Karla Odeth Ruiz Sánchez" />
+              <div class="card-body">
+                <h3 class="card-title nombreEquipo">Karla Odeth Ruiz Sánchez</h3>
+                <p class="card-text resumen">
+                  Desarrolladora Java Full Stack, interesada en crear soluciones
+                  web integrales y el desarrollo de software.
+                </p>
+                <div style="margin: 0; display: flex; justify-content: center; gap: 1.5rem;">
+                  <a href="https://www.linkedin.com/in/karla-odeth-ruiz-9127a32b8/" target="_blank">
+                    <img src="../assets/icons/linkedin.webp" style="width:2rem; margin: 0;">
+                  </a>
+                  <a href="https://github.com/Karla-ORS" target="_blank">
+                    <img src="../assets/icons/github.webp" style="width:2rem; margin: 0;">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Segunda fila de tarjetas -->
+        <div class="row g-4 mt-0">
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100">
+              <img src="../assets/img/integrantes/ray.webp" class="card-img-top" alt="Raymundo Mendoza Ramirez" />
+              <div class="card-body">
+                <h3 class="card-title nombreEquipo">Raymundo Mendoza Ramirez</h3>
+                <p class="card-text resumen">
+                  Desarrollador Java Full Stack, con interés en el desarrollo
+                  web y análisis de datos.
+                </p>
+                <div style="margin: 0; display: flex; justify-content: center; gap: 1.5rem;">
+                  <a href="http://www.linkedin.com/in/raymundo-mendoza-ramirez-6550621a4" target="blank">
+                    <img src="../assets/icons/linkedin.webp" style="width:2rem; margin: 0;">
+                  </a>
+                  <a href="https://github.com/R1ymundo" target="blank">
+                    <img src="../assets/icons/github.webp" style="width:2rem; margin: 0;">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100">
+              <img src="../assets/img/integrantes/ricardo.webp" class="card-img-top" alt="Ricardo Miguel Raya" />
+              <div class="card-body">
+                <h3 class="card-title nombreEquipo">Ricardo Miguel Raya</h3>
+                <p class="card-text resumen">
+                  Desarrollador Java Full Stack con experiencia en la creación y
+                  desarrollo de aplicaciones web.
+                </p>
+                <div style="margin: 0; display: flex; justify-content: center; gap: 1.5rem;">
+                  <a href="https://www.linkedin.com/in/ricardo-miguel-raya?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bs8sqkaxVS3iIKbxYMR%2B4ig%3D%3D" target="blank">
+                    <img src="../assets/icons/linkedin.webp" style="width:2rem; margin: 0;">
+                  </a>
+                  <a href="https://github.com/RicardoMiguelR" target="blank">
+                    <img src="../assets/icons/github.webp" style="width:2rem; margin: 0;">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100">
+              <img src="../assets/img/integrantes/sandy.webp" class="card-img-top" alt="Sandra De La Sancha Aguilar" />
+              <div class="card-body">
+                <h3 class="card-title nombreEquipo">Sandra De La Sancha Aguilar</h3>
+                <p class="card-text resumen">
+                  Desarrolladora Java Full Stack con experiencia en implementación 
+                  y administración de bases de datos.
+                </p>
+                <div style="margin: 0; display: flex; justify-content: center; gap: 1.5rem;">
+                  <a href="http://www.linkedin.com/in/sandra-de-la-sancha-developer" target="blank">
+                    <img src="../assets/icons/linkedin.webp" style="width:2rem; margin: 0;">
+                  </a>
+                  <a href="https://github.com/Sandra-De-La-Sancha" target="blank">
+                    <img src="../assets/icons/github.webp" style="width:2rem; margin: 0;">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="site-footer mt-5">
+      <div id="agregarFooter"></div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Scripts locales -->
+    <script src="../js/nav.js"></script>
+    <script src="../js/scriptFooter.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>
