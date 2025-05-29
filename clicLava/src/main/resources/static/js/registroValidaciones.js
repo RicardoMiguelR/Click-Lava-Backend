@@ -272,7 +272,7 @@ document.getElementById('btnEnviar').addEventListener('click', async () => {
 
   const registroUsuario = async () => {
     try {
-      const response = await fetch("http://13.58.208.54/api/usuarios/", {
+      const response = await fetch("/api/usuarios/", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
